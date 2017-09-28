@@ -1,0 +1,60 @@
+import { CLOSER_MODIFIER } from '../constants';
+import {
+  ICell,
+  IEntity,
+} from '../map';
+import Material from '../map/material';
+import { IPathfindingNode } from '../pathfinding/a-star';
+
+
+export default class Cell implements ICell, IPathfindingNode {
+  // Interface fulfillment
+  public gCost: number;
+  public hCost: number;
+  public parentNode: Cell;
+  public view: any;
+
+  public weight: number;
+  public floor: Material;
+  public content: Material;
+  public ground: CellGround;
+  public readonly entities = new Set<IEntity<ICell>>();
+
+
+  constructor(
+    public layer: number,
+    public readonly row: number,
+    public readonly col: number,
+  ) {}
+
+
+  get isObstacle(): boolean {
+    return this.weight === 0;
+  }
+
+  get canStand(): boolean {
+    return this.floor && !this.content;
+  }
+
+  get isEmpty(): boolean {
+    return !this.floor && !this.content;
+  }
+
+  get hasRamp(): boolean {
+    return this.ground && this.ground.isRamp;
+  }
+
+  get fCost(): number {
+    return this.gCost + this.hCost * CLOSER_MODIFIER;
+  }
+
+
+  toString(): string {
+    return `Cell(${this.layer}, ${this.row}, ${this.col})`;
+  }
+}
+
+
+interface CellGround {
+  isRamp: boolean;
+}

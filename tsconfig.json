@@ -1,0 +1,19 @@
+{
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+
+  "exclude": [ "node_modules" ],
+
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es6",
+    "jsx": "react",
+
+    "plugins": [{
+      "name": "tslint-language-service"
+    }]
+  }
+}

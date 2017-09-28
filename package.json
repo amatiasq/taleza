@@ -1,0 +1,27 @@
+{
+  "name": "taleza",
+  "version": "0.0.0",
+  "description": "A game",
+  "dependencies": {
+    "amq-tools": "^2.0.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.0.7",
+    "@types/react-dom": "^15.5.5",
+    "ts-loader": "^2.3.7",
+    "tslint": "^5.7.0",
+    "tslint-language-service": "^0.9.6",
+    "typescript": "^2.5.3",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.0"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --config ./config/webpack.config.js",
+    "build": "webpack --config ./config/webpack.config.js",
+    "lint": "tslint -c tslint.json --type-check --project tsconfig.json 'src/**/*.ts'"
+  },
+  "author": "A. Matías Quezada <amatiasq@gmail.com>",
+  "license": "MIT"
+}
