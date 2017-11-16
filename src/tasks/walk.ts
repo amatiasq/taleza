@@ -3,8 +3,8 @@ import {
   SHOW_WALKING_PATH,
 } from '../constants';
 import Cell from '../game/cell';
-import GameMap from '../map';
 import AStar from '../pathfinding/a-star';
+import World from '../world';
 import {
   ITask,
   IWorker,
@@ -30,13 +30,13 @@ export default class Walk implements ITask {
 
   isValidWorker(worker: IWorker): number {
     // TODO: consider ramps, target should not move if he is on a ramp and target is empty cell above
-    const distance = this.pathfinding.getDistance(worker.location, this.destination);
+    const distance = this.pathfinding.getDistance(world.get(worker.location), this.destination);
     if (distance === 0) return null;
     return (MAX_WALK_DISTANCE - distance) / MAX_WALK_DISTANCE;
   }
 
   assign(worker: IWorker): void {
-    this.path = this.pathfinding.calculate(worker.location, this.destination);
+    this.path = this.pathfinding.calculate(world.get(worker.location), this.destination);
     if (!this.path)
       throw new Error(`Can't find path for ${this}`);
 

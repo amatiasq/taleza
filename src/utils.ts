@@ -1,8 +1,7 @@
+import Vector3D from 'amq-tools/vector3d';
 import {
-
-
-DIAGONAL_MOVEMENT_COST,
-LAYER_CHANGE_COST,
+  DIAGONAL_MOVEMENT_COST,
+  LAYER_CHANGE_COST,
 } from './constants';
 
 export function* range(start: number, end = start, step = 1) {
@@ -15,20 +14,17 @@ export function* range(start: number, end = start, step = 1) {
 
 
 export interface INode {
-  readonly layer: number;
-  readonly row: number;
-  readonly col: number;
+  readonly location: Vector3D;
 }
 
 export function getDistance(nodeA: INode, nodeB: INode) {
-  const x = Math.abs(nodeA.col - nodeB.col);
-  const y = Math.abs(nodeA.row - nodeB.row);
-  const z = Math.abs(nodeA.layer - nodeB.layer);
+  const { x, y, z } = nodeA.location
+    .sustract(nodeB.location)
+    .map(Math.abs);
 
   const layerMovement = x > y ?
     DIAGONAL_MOVEMENT_COST * 10 * y + 10 * (x - y) :
     DIAGONAL_MOVEMENT_COST * 10 * x + 10 * (y - x);
 
   return layerMovement + z * LAYER_CHANGE_COST;
-
 }

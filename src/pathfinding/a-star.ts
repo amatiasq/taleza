@@ -158,7 +158,6 @@ export default class AStar<T extends IPathfindingNode> {
   private static round(value: number) {
     return Math.round(value * 100) / 100;
   }
-
 }
 
 

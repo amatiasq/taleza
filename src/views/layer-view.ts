@@ -2,6 +2,7 @@ import Cell from '../game/cell';
 import Layer from '../map/layer';
 import CellView from './cell-view';
 
+
 export default class LayerView {
   public x = 0;
   public y = 0;

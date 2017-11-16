@@ -1,13 +1,10 @@
+import Vector3D from 'amq-tools/vector3d';
 import { CLOSER_MODIFIER } from '../constants';
-import {
-  ICell,
-  IEntity,
-} from '../map';
-import Material from '../map/material';
 import { IPathfindingNode } from '../pathfinding/a-star';
+import { IEntity, INode } from '../world';
+import Material from '../world/material';
 
-
-export default class Cell implements ICell, IPathfindingNode {
+export default class Cell implements INode, IPathfindingNode {
   // Interface fulfillment
   public gCost: number;
   public hCost: number;
@@ -18,14 +15,10 @@ export default class Cell implements ICell, IPathfindingNode {
   public floor: Material;
   public content: Material;
   public ground: CellGround;
-  public readonly entities = new Set<IEntity<ICell>>();
+  public readonly entities = new Set<IEntity<Cell>>();
 
 
-  constructor(
-    public layer: number,
-    public readonly row: number,
-    public readonly col: number,
-  ) {}
+  constructor(public readonly location: Vector3D) {}
 
 
   get isObstacle(): boolean {
@@ -50,7 +43,7 @@ export default class Cell implements ICell, IPathfindingNode {
 
 
   toString(): string {
-    return `Cell(${this.layer}, ${this.row}, ${this.col})`;
+    return `Cell(${this.location})`;
   }
 }
 

@@ -1,16 +1,9 @@
-import GameMap, {
-  ICell,
-  IEntity,
-} from '../map';
-import {
-  ITask,
-  IWorker,
-} from '../tasks/task';
+import { ITask, IWorker } from '../tasks/task';
+import World, { IEntity } from '../world';
 import Cell from './cell';
 import TaskManager from './task-manager';
 
-
-export default class Gnome implements IWorker, IEntity<Cell> {
+export default class Human implements IWorker, IEntity<Cell> {
   protected workingOn: ITask;
   public location: Cell;
   public view: any;
@@ -25,7 +18,7 @@ export default class Gnome implements IWorker, IEntity<Cell> {
     this.workingOn = task;
   }
 
-  update(map: GameMap<Cell>, tasks: TaskManager): void {
+  update(map: World<Cell>, tasks: TaskManager): void {
     if (this.isIdle) {
       tasks.addIdle(this);
       return;

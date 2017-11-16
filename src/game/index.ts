@@ -1,17 +1,22 @@
-import GameMap from './map';
+import Vector3D from 'amq-tools/vector3d';
+import World from '../world';
+import Cell from './cell';
+
+export { default as TaskManager } from './task-manager';
+export { default as Human } from './human';
+export { Cell };
 
 
 export default class TalezaGame {
 
-  private map: GameMap;
+  private map: World<Cell>;
 
 
   constructor(canvas: HTMLCanvasElement) {}
 
 
   setMapSize(width: number, height: number, tileSize: number) {
-    this.map = new GameMap<Cell>(6, 11, 11, (layer, row, col) => new Cell(layer, row, col));
-    this.map = new GameMap(width, height, tileSize);
+    this.map = new World<Cell>(Vector3D.of(6, 11, 11), position => new Cell(position));
   }
 
 

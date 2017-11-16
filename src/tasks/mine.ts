@@ -1,5 +1,5 @@
 import Cell from '../game/cell';
-import GameMap from '../map';
+import World from '../world';
 import AStar from '../pathfinding/a-star';
 import {
   ITask,
@@ -38,7 +38,7 @@ export default class Mine implements ITask {
     this.route.assign(worker);
   }
 
-  step(map: GameMap<Cell>, worker: IWorker): void {
+  step(map: World<Cell>, worker: IWorker): void {
     if (this.isCompleted)
       return;
 

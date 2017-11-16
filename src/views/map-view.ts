@@ -1,8 +1,6 @@
-import {
-  Game,
-} from 'phaser-ce';
+import Game from '../game';
 import Cell from '../game/cell';
-import GameMap from '../map/map';
+import GameMap from '../map';
 import LayerView from './layer-view';
 
 
